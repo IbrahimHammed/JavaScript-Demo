@@ -1,5 +1,36 @@
 const prompt = require('prompt-sync')();
 
+// Global products array
+let products = [];
+
+// Function to set up products
+function productSetup() {
+    console.log("Product setup selected.");
+    console.log();
+    
+    let addMore = "yes";
+
+    while (addMore.toLowerCase() === "yes") {
+        let product = {};
+        
+        product.Code = prompt("Enter product code: ");
+        product.Name = prompt("Enter product name: ");
+        product.Category = prompt("Enter product category: ");
+        product.CostPrice = parseFloat(prompt("Enter product cost price: "));
+        product.SellingPrice = parseFloat(prompt("Enter product selling price: "));
+
+        products.push(product);
+
+        console.log();
+        console.log("Products added successfully!");
+        console.table(products);
+        console.log();
+
+        addMore = prompt("Do you want to add another product? (yes/no): ");
+    }
+    
+}
+
 // Create a welcome banner showing the name of the program and the author
 console.log()
 // Draw a line with *
@@ -23,29 +54,7 @@ let choice = prompt("Select an option (1-5): ");
 
 while (choice !== "5") {
     if (choice === "1") {
-        console.log("Product setup selected.");
-        // Call product setup function here
-        console.log();
-        // Prompt user to enter product details
-        products = [];
-        let addMore = "yes";
-        product = {};
-
-        while (addMore.toLowerCase() === "yes") {
-            product.Code = prompt("Enter product code: ");
-            product.Name = prompt("Enter product name: ");
-            product.Category = parseInt(prompt("Enter product category: "));
-            product.CostPrice = parseFloat(prompt("Enter product cost price: "));
-            product.SellingPrice = parseFloat(prompt("Enter product selling price: "));
-
-            products.push(product);
-
-            addMore = prompt("Do you want to add another product? (yes/no): ");
-        }
-        console.log();
-        console.log("Products added successfully!");
-        console.table(products);
-
+        productSetup();
     } else if (choice === "2") {
         console.log("Inventory Management selected.");
         // Call inventory management function here
